@@ -62,7 +62,7 @@ const entries = [
 // console.log(entries);
 
 // const entriesGrouppedByAuthor = _.groupBy(entries, "autor") 
-// // console.log(entriesByAuthor)
+// console.log(entriesGrouppedByAuthor["Juan Pérez"])
 
 // function filterByCss3Tag(entry) {
 //   return _.includes(entry.tags, "CSS3")
@@ -102,3 +102,13 @@ const entries = [
 
 // const invertedTitleByEntry = _.invert(_.mapValues(_.groupBy(entries, "autor"), mapFirstTitle))
 // // console.log(invertedTitleByEntry)
+
+
+
+function filterbyCssTag(entry){
+  return _.includes(entry.tags, "CSS3");
+}
+
+const entriesFilterByCssTag = _.filter(entries, filterbyCssTag);
+
+console.log(entriesFilterByCssTag)
