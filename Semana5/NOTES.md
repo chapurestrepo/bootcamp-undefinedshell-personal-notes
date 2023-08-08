@@ -321,3 +321,130 @@ specie
 10_000_000
 
 ```
+
+## Clase 2 Asincronismo
+
+- `setTimeot` Función para que otra se ejecute desps de un tiempo determinado
+- **Callback:** es una función que se va a ejecutar en el futuro
+
+```js
+function cocinar(ingrediente, callback, tiempo){
+    setTimeout(function(){ callback(ingrediente)}, time)
+}
+
+cook("arroz", console.log, 10000)
+//RESP desps de 10s imprime "arroz"
+
+cook("huevo", console.log, 2000)
+//RESP desps de 2s imprime "huevo"
+```
+
+- el **infierno de los callbacks** es algo con lo que hay que tener cuidado porque un callback puede ser otra función para garantizar tener 
+
+
+
+```js
+function cocinar(ingrediente, callback, tiempo){
+    setTimeout(function(){ callback(ingrediente)}, time)
+}
+
+cook("arroz",
+function(ingrediente){
+    console.log(`Ya tengo el ${ingrediente}`)
+    //RESP desps de 10s imprime "Ya tengo el arroz"
+
+    cook("huevo", console.log, 2000)
+    //Cuandose entrega el arroz empizan los 2 seg para pintar el hevo
+    //RESP desps de 2s imprime "huevo"
+},
+10000)
+```
+
+### Promesas
+Con la palabra `new Promise()` se retorna una promesa
+Ya no se usa el callback
+
+```js
+// Con callback
+function calculandoCuadrado(numero, callback){
+const result = numero ** 2;
+
+setTimeout(function(){
+    callback(result);
+}, 2000)
+
+}
+
+calculandoCuadrado(2, console.log);
+// RESP: devuelve en consola 4 desps de 2 segundos
+
+calculandoCuadrado(2, function(result){
+    calculandoCuadrado(result, function(result){
+        calculandoCuadrado(result, console.log)
+        //RESP: devuelve 256 desps de los segundos que pasen pasandoresultado de calback en callback
+    });
+})
+
+// Con PROMESAS
+function calculandoCuadrado(numero){
+    return new Promise(
+        function(resolve){
+            const result = numero ** 2;
+            
+            setTimeout(function(){
+                //se reempla
+                resolve(result);
+            }, 2000)
+        }
+    )
+}
+
+calculandoCuadrado(2).then(console.log)
+// RESP: ddevuelve 4 desps de 2s
+
+
+function calcular(result){
+    return calculandoCuadrado(result, console.log)
+}
+
+calculandoCuadrado(2).then(calcular).then(calcular).then(console.log)
+ 
+```
+
+- Las promesas son muy comunes cuando se hacen llamados a APIs haciendo fetch
+- `fetch` es una promesa
+
+```js
+//llana la API 
+fetch('https://dog.ceo/api/breeds/list/all')
+// caundo lo tenga los devulve transforma en formato JSON
+.then(function(data) {
+    return data.json()
+})
+// Cuando lo tenga los pinta en consola
+.then(function(jsonData){
+    console.log(jsonData)
+})
+```
+
+Hay una mejor forma de trabajar con promesas
+## Async / Await 
+- funciona con promesas 
+
+```js
+async function main(){ 
+    // Al poner el await resuelve la promesa y se la asigna a result sin necesidad del .then
+    const result = await calculandoCuadrado(2)
+    console.log(result)
+    // RESP: 4 desps de 2s
+
+    const result2 = await calculandoCuadrado(result)
+    const result3 = await calculandoCuadrado(result2)
+    console.log(result3)
+}
+
+main()
+
+```
+
+## Clase 2 Asoncronismo

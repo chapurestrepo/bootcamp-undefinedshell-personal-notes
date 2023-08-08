@@ -5,16 +5,6 @@
 // Imprime el nombre completo y el promedio de calificaciones de cada estudiante utilizando Template literals.
 // Usa el siguiente array de estudiantes como entrada:**
 
-
-// ----
-
-
-// Crea una función asíncrona calcularPromedios que acepte un array de estudiantes.
-// Dentro de calcularPromedios, calcula el promedio de las calificaciones al cuadrado de cada estudiante.
-// Imprime el nombre completo y el promedio de calificaciones de cada estudiante utilizando Template literals.
-// Usa el siguiente array de estudiantes como entrada:**
-
-
 const estudiantesInfo = [
   { name: 'Ana', lastName: 'García', scores: [3, 5, 4, 4.5] },
   { name: 'Luis', lastName: 'Pérez', scores: [4.5, 4, 4, 5] }
@@ -53,7 +43,6 @@ student1.name;
 
 
 // PARTE2 la función que hace el promedio
-
 
 function averageCalculator(students){
     const average = students.map(({name, lastName, scores}) => {
