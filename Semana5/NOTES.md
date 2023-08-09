@@ -447,4 +447,119 @@ main()
 
 ```
 
-## Clase 2 Asoncronismo
+## Clase 3
+
+### Herencia clásica/
+
+- la **herencia clásica** usa clases para definir propiedaes que luego otras clases pueden extender. El problema con esto es que al extender heredas cosas que probablemente no usarás.
+
+- Esta herencia tiene 2 tiposde abstracciones. Clases (abstracciones de los objetos) y objetos
+
+- La **herencia prototipada** es mas simple y poderosa. Solo hay objetos, una sola abstracción. 
+
+- el **prototipo** es el objeto del que me voy a copiar para crear los otros objetos
+
+- Para implementar herencia
+    -  se usa `Object.create()` o `Object.setPrototypeOf()`
+
+    - Usando funciones costructoras
+
+    ```js
+    function Cat(name){
+        this.name = name;
+    }
+
+    Cat.prototype.miau = function() {
+        console.log(`${this.name} miau!`)
+    }
+
+    let parcero = new Cat("Parcero")
+    parcero.miau()
+    // RESP: Parcero miau!
+
+    console.log(parcero)
+    //RESP: Cat { name: 'Parcero' }
+
+    ```
+
+    - **HOY** Usando clases costructoras
+
+    ```js
+    class Cat{
+        constructor(name){
+            this.name = name;
+        }
+
+        miau() {
+            console.log(`${this.name} miau!`)
+        }
+    }
+
+    let parcero = new Cat("Parcero")
+    parcero.miau()
+    // RESP: Parcero miau!
+
+    console.log(parcero)
+    //RESP: Cat { name: 'Parcero' }
+    ```
+
+### Closures
+Es una función que tiene acceso al scope de su función envolvente. Tiene la capacidad de recordar
+
+generalmente es una función dentro de otra función y retorna un valor
+
+```js
+function envolvente(saludo) {
+  function porFuera(nombre) {
+    console.log(`${saludo}, ${nombre}`);
+  }
+
+  return porFuera;
+}
+
+// defino la primera función usando la envolvente para ddefinir el saludo
+const diHola = envolvente("hola");
+const diAdios = envolvente("Adios");
+
+diHola
+//Dice que es una función, debe volver a llamarce para definir el nombre, la función de dentro
+
+diHola("Daniel");
+//RESP console: Hola, Daniel  
+diAdios("Felipe");
+//RESP console: Adios, Felipe  
+```
+
+### This
+
+- Puede ser el **enlace global** (global binding). el consola sin mas llama el objeto window
+
+- Puede ser un enlace implicito y se refiere a quien llama la función
+
+    ```js
+    const obj = {
+        "name" : "Daniel",
+        diHola : function() {
+            console.log(`Hola ${this.name}`)
+        }
+    }
+
+    //this.name === obj.name
+    obj.diHola()
+    ```
+
+- Puede ser un enlace explicito donde tengo que definirlos con `call()` o con `apply()`.
+
+    ```js
+    function saluda(saludo){
+        console.log(`${saludo} ${this.name}`)
+    }
+
+    const persona = {
+        name: 'Dani'
+    }
+
+    saluda.call(persona, ...['Quiubo'])
+    // RESP: Quiubo Dani
+    ```
+- Cuando se usa la palabra new redefine el enlace del this
