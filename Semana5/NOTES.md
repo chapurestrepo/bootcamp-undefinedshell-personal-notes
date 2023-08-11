@@ -1,6 +1,7 @@
 # Semana 5
 
 ## Clase 1
+---
 ### ECMAScript 2015
 
 - NUNCA usar `Var`. Usar `const` (Por defecto) o `let` (Cuando se quiere reasignar el valor )
@@ -322,7 +323,9 @@ specie
 
 ```
 
-## Clase 2 Asincronismo
+## Clase 2
+### Asincronismo
+---
 
 - `setTimeot` Función para que otra se ejecute desps de un tiempo determinado
 - **Callback:** es una función que se va a ejecutar en el futuro
@@ -448,7 +451,7 @@ main()
 ```
 
 ## Clase 3
-
+---
 ### Herencia clásica/
 
 - la **herencia clásica** usa clases para definir propiedaes que luego otras clases pueden extender. El problema con esto es que al extender heredas cosas que probablemente no usarás.
@@ -563,3 +566,58 @@ diAdios("Felipe");
     // RESP: Quiubo Dani
     ```
 - Cuando se usa la palabra new redefine el enlace del this
+
+
+## Clase 4 
+---
+
+### Javascript funcional
+forma de escribir en JS basado en expresiones matematicas con caracteristicas especiales 
+- Funciones ciudadanos de primera clase (funciones como valores)
+- Funciones puras
+- Inmutabilidad
+- Composición de funciones (Forma de escribirlas)
+- Eitar uso de bucles, remplazados por map(), filter() y reduce() 
+- Expresiones lambda
+
+```js
+const compose = (f, g) => x => f(g(x));
+const addFive = x => x + 5;
+const double = x => x * 2;
+const addFiveAndDouble = compose(double, addFive);
+const result = addFiveAndDouble(3);
+
+result
+// RESP: 20
+
+```
+
+### Metodos funcionales de los arrays
+
+```js
+products = [
+{id: 1, name: "Producto", price: 100, category: "Electronics", rating: 4.3}...
+];
+
+// Se crean funcionalidades para reutilizar luego
+const isElectronic = product => product.category === "Electronics";
+
+const usandoMetodoFuncional = products.filter(isElectronic);
+```
+
+### Regex
+expresiones regulares, Separa cadenas de texto con un patrón especifico, usado comunmente para busquedas en string. Validar, Búsqueda, Extracción o Reemplazo
+
+```js
+// Este es un reges plano en el que no puedes usar variables
+const reg = ⁄regla⁄;
+
+// se puede definir de esta manera para reutilizarlo a futuro
+const varReg = new RegExp(regla);
+```
+
+- Ejemplo: match sirve para encontrar lo que se define en el regex dentro del string
+
+```js
+"palabra".match(⁄pala⁄)
+```
