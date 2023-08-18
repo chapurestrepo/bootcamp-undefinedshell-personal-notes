@@ -154,3 +154,12 @@ npm create vite@latest my-react-app -- --template react
       </p>
     </div>
     ```
+
+
+## Clase 4
+React hooks
+---
+
+- los hooks son una evolución de los ciclos de vida de react
+
+
