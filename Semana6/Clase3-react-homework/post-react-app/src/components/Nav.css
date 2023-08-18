@@ -1,0 +1,21 @@
+/* ----------------------------- nav */
+nav {
+    padding: 16px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+nav ul li a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+nav ul li a:hover {
+    opacity: .6;
+}

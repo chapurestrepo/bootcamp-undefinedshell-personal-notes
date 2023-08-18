@@ -25,3 +25,7 @@ export const Articles = [
     },
   ];
 
+
+export const Tags = ["Design", "UX", "UI", "Life style", "Code", "Cooking"]
+
+export const NavList = ["Home", "Blog", "About", "Contact"]
