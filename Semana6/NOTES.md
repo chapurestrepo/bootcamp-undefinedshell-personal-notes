@@ -158,8 +158,78 @@ npm create vite@latest my-react-app -- --template react
 
 ## Clase 4
 React hooks
+presentación https://slides.com/glrodasz/react-lifecycle-hooks
 ---
 
 - los hooks son una evolución de los ciclos de vida de react
 
+**Estado**
 
+- Es como una memoria que se puerde al refrescar la página
+
+-  Antes se tenia que hacer con Clases
+- Ahora con funciones se puede usar el hook `useState`
+- El array de use state hay 2 partes, la primera es es valor y la 2da una función 
+- `usestate()` recibe el valir inicial 
+- Por convención se define así `cont [name, setName] => useState(0)` en este caso la contante es `name` se usará `setName` para cambiar el estado y el valor inicial es `0`
+
+```js
+import { useState} from 'react';
+function App(){
+    const [count, setCount] = useState(0);
+
+    const handleClick = () => {setCount(count + 1)}
+
+    return (
+        <button onClick={handleClick}>Count is {count}</button>
+    )
+}
+
+```
+
+**Ciclos de vida**
+
+- Es el proceso mediante el cual se monta, actualiza y muere la aplicación
+- hoy generalmente se los métodos `Constructor`, `Render`, `componentDidMount`
+- Hay métodos especiales para detectar errores `getDerivedStateFromError` o `componentWillCatch`
+- desps de react 16 es asyncrono y se pueden pintar componente en diferente orden
+
+**useEffect**
+
+permite manejar efectos secundarios 
+
+- se actualiza cada que hay un cambio de estado del componente
+
+```js
+useEffect(() => {
+    console.log("I just mount");
+}
+)
+```
+
+- tambien se puede ejecutar solo cuando el componente se monté pasando un array de dependencias vacio como 2do parametro
+- ES EL MON¿MENTO PERFECTO PARA LLAMAR LA API
+```js
+useEffect(() => {
+    console.log("I just mount");
+}, []
+)
+```
+
+- Para ejecutar algo cuando se destruya el componente se agrega un return en la función del useEffect
+
+```js
+useEffect(() => {
+    return () => console.log("I just mount");
+}, []
+)
+```
+
+- si solo quiero que se ejecute cuando cambio un estado se pasa en el arreglo de dependencias
+
+```js
+useEffect(() => {
+    console.log("I just mount");
+}, [state]
+)
+```
