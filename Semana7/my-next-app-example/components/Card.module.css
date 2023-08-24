@@ -1,0 +1,49 @@
+/* ----------------------------- cards */
+.card {
+    grid-auto-columns: min-content;
+    border: 2px solid var(--color-black);
+    background-color: var(--color-light);
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0px 0px 0px var(--color-light);
+    transition: .4s;
+    cursor: pointer;
+}
+
+.card:hover{
+    box-shadow: 4px 4px 0px var(--color-primary);
+    border: 2px solid var(--color-primary);
+    transition: .8s;
+}
+
+.card-cover {
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+}
+
+.card-image img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.card-tags {
+    position: absolute;
+    width: calc(100% - 16px);
+    bottom: 8px;
+    left: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.card-title{
+    padding: 16px;
+}
+
+.card-description{
+    padding: 0px 16px 40px;
+}

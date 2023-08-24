@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-default: 'Inconsolata', monospace;
+    --base-size: 18px;
+
+    --color-primary: #FF6060;
+    --color-black: #191919;
+    --color-black-light: #333635;
+    --color-light: #e6ffef;
+}
+
+/* suppert for native dark mode  */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: #FF6060;
+        --color-black: #e6ffef;
+        --color-black-light: #b4cabc;
+        --color-light: #191919;
+    }
+}
+
+body {
+    font-family: var(--font-default);
+    font-size: var(--base-size);
+    font-weight: 400;
+    background-color: var(--color-light);
+    color: var(--color-black)
+}
+
+
+.page {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
