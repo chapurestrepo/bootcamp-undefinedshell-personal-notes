@@ -133,3 +133,60 @@ export default About;
 
 - en next se pueden nombrar los archivos como js, no necesita que sea JSX
 - se puede usar la ruta `@/route/file` para localizar ficheros que esten en el root proyecto 
+
+## Clase 3
+Route API en Next.js
+---
+
+- Así como en pages defino las rutas del project en `api` ejecuta código desde el lado del servidor
+- es un lugar para ejecutar variables de entorno seguras
+- es el lugar perfecto para consumir los datos de una api
+```js
+export default async function handler(req, res){
+    const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then((data) => data.json());
+    res.status(200).json(posts);
+}
+```
+- Tambien es el lugar para trabajar los datos y adaptarlos a lo que necesita recibir el frontend por ejemplo remapear o meter otros campos
+```js
+export default async function handler(req, res) {
+  const posts = await fetch("https://jsonplaceholder.typicode.com/posts").then(
+    (data) => data.json()
+  );
+
+  const mappingPosts = posts.map((post) => ({
+    cover: "url.jpg",
+    authorId: post.userId,
+    id: post.id,
+    title: post.title,
+    body: post.body,
+  }));
+
+  res.status(200).json(mappingPosts);
+}
+
+```
+
+
+- Para pintarlo en el componente tenemos que hacer uso de los estados y un use efect que se actualice el estado
+
+```js
+const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    async function fetchArticles() {
+      const articlesPosts = await fetch('api/posts').then((data) => data.json());
+
+      setArticles(articlesPosts)
+    }
+
+    fetchArticles();
+  }, []);
+
+  const articlesMap = articles.map((post) => (
+    <div>
+      <h2>{post.title}</h2>
+      ...
+    </div>
+  ));
+```

@@ -6,7 +6,7 @@ import { Filters } from "@/components/Filters";
 import { Articles, NavList, Tags } from "@/InfoBlog";
 
 import stylesFilter from "@/components/Filters.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 
 function Home() {
@@ -39,12 +39,38 @@ function Home() {
     );
   });
 
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    async function fetchArticles() {
+      const articlesPosts = await fetch('api/posts').then((data) => data.json());
+
+      setArticles(articlesPosts)
+    }
+
+    fetchArticles();
+  }, []);
+
+  const articlesMap = articles.map((post) => (
+    <div>
+      <h2>{post.title}</h2>
+
+    </div>
+  ));
+
+  
+
   return (
     <div className="page">
       <Header>BLOG</Header>
       <Nav>{InfoNav}</Nav>
       <Filters>{TagItem}</Filters>
       <ListPosts>{listArticles}</ListPosts>
+
+
+{articlesMap}
+
+
     </div>
   );
 }
