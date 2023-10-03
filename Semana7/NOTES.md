@@ -1,4 +1,4 @@
-# Semana 6
+# Semana 7
 
 ## Clase 1
 
